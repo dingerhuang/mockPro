@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mock.dao.KafkaMapper">
+  <resultMap id="BaseResultMap" type="com.mock.entity.Kafka">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="port" jdbcType="INTEGER" property="port" />
+    <result column="topicName" jdbcType="VARCHAR" property="topicName" />
+    <result column="acks" jdbcType="VARCHAR" property="acks" />
+    <result column="bufferMemory" jdbcType="INTEGER" property="bufferMemory" />
+    <result column="keySerializer" jdbcType="VARCHAR" property="keySerializer" />
+    <result column="valueSerializer" jdbcType="VARCHAR" property="valueSerializer" />
+    <result column="key" jdbcType="INTEGER" property="key" />
+    <result column="values" jdbcType="INTEGER" property="values" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ip, port, topicName, acks, bufferMemory, keySerializer, valueSerializer, key, 
+    values, times
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mock_kafka_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryKafkaList" parameterType="com.mock.vo.KafkaQueryVo" resultMap="BaseResultMap">
+    select * from t_mock_kafka_result where 1=1
+    <if test="ip !=null">
+      	and ip=#{ip,jdbcType=VARCHAR}
+    </if>
+    <if test="port !=null">
+      	and port=#{port,jdbcType=INTEGER}
+    </if>
+    <if test="topicName !=null">
+      	and topicName=#{topicName,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_mock_kafka_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mock.entity.Kafka">
+    insert into t_mock_kafka_result (id, ip, port, 
+      topicName, acks, bufferMemory, 
+      keySerializer, valueSerializer, key, 
+      values, times)
+    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, 
+      #{topicName,jdbcType=VARCHAR}, #{acks,jdbcType=VARCHAR}, #{bufferMemory,jdbcType=INTEGER}, 
+      #{keySerializer,jdbcType=VARCHAR}, #{valueSerializer,jdbcType=VARCHAR}, #{key,jdbcType=INTEGER}, 
+      #{values,jdbcType=INTEGER}, #{times,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mock.entity.Kafka">
+    insert into t_mock_kafka_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="topicName != null">
+        topicName,
+      </if>
+      <if test="acks != null">
+        acks,
+      </if>
+      <if test="bufferMemory != null">
+        bufferMemory,
+      </if>
+      <if test="keySerializer != null">
+        keySerializer,
+      </if>
+      <if test="valueSerializer != null">
+        valueSerializer,
+      </if>
+      <if test="key != null">
+        `key`,
+      </if>
+      <if test="values != null">
+        `values`,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null">
+        #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="acks != null">
+        #{acks,jdbcType=VARCHAR},
+      </if>
+      <if test="bufferMemory != null">
+        #{bufferMemory,jdbcType=INTEGER},
+      </if>
+      <if test="keySerializer != null">
+        #{keySerializer,jdbcType=VARCHAR},
+      </if>
+      <if test="valueSerializer != null">
+        #{valueSerializer,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=INTEGER},
+      </if>
+      <if test="values != null">
+        #{values,jdbcType=INTEGER},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mock.entity.Kafka">
+    update t_mock_kafka_result
+    <set>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null">
+        topicName = #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="acks != null">
+        acks = #{acks,jdbcType=VARCHAR},
+      </if>
+      <if test="bufferMemory != null">
+        bufferMemory = #{bufferMemory,jdbcType=INTEGER},
+      </if>
+      <if test="keySerializer != null">
+        keySerializer = #{keySerializer,jdbcType=VARCHAR},
+      </if>
+      <if test="valueSerializer != null">
+        valueSerializer = #{valueSerializer,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        key = #{key,jdbcType=INTEGER},
+      </if>
+      <if test="values != null">
+        values = #{values,jdbcType=INTEGER},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mock.entity.Kafka">
+    update t_mock_kafka_result
+    set ip = #{ip,jdbcType=VARCHAR},
+      port = #{port,jdbcType=INTEGER},
+      topicName = #{topicName,jdbcType=VARCHAR},
+      acks = #{acks,jdbcType=VARCHAR},
+      bufferMemory = #{bufferMemory,jdbcType=INTEGER},
+      keySerializer = #{keySerializer,jdbcType=VARCHAR},
+      valueSerializer = #{valueSerializer,jdbcType=VARCHAR},
+      key = #{key,jdbcType=INTEGER},
+      values = #{values,jdbcType=INTEGER},
+      times = #{times,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

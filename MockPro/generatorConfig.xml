@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >  
+  
+<generatorConfiguration>    
+    <!-- 数据库驱动包位置 -->    
+    <classPathEntry    
+        location="C:\Users\qw\.m2\repository\mysql\mysql-connector-java\5.1.36\mysql-connector-java-5.1.36.jar" />    
+    <context id="context1">    
+        <commentGenerator>    
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+            <property name="suppressAllComments" value="true"/>    
+        </commentGenerator>    
+        <!-- 数据库链接URL、用户名、密码 -->    
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"    
+            connectionURL="jdbc:mysql://10.1.4.212:3306/sys_library" userId="root" password="mysql" />    
+        <!-- 生成模型的包名和位置 -->    
+        <javaModelGenerator targetPackage="com.mock.entity" targetProject="MockDemo/src/main/java" />    
+        <!-- 生成的映射文件报名和位置 -->    
+        <sqlMapGenerator targetPackage="mapper" targetProject="MockDemo/src/main/resources" />    
+        <!-- 生成DAO的包名和位置 -->    
+        <javaClientGenerator targetPackage="com.mock.dao" targetProject="MockDemo/src/main/java" type="XMLMAPPER" />    
+        <!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->     
+<!--         <table schema="sys_library" tableName="t_books" domainObjectName="Book"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="ISBNNumber" property="ISBNNumber" />     -->
+<!--             <columnOverride column="bookName" property="bookName" />    -->
+<!--             <columnOverride column="price" property="price" />   -->
+<!--             <columnOverride column="press" property="press" />   -->
+<!--             <columnOverride column="writer" property="writer" />   -->
+<!--             <columnOverride column="book_type" property="book_type" />   -->
+<!--             <columnOverride column="borrow_type" property="borrow_type" />   -->
+<!--         </table> -->
+<!--         <table schema="sys_library" tableName="t_book_type" domainObjectName="BookType"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="type_code" property="type_code" />     -->
+<!--             <columnOverride column="type_value" property="type_value" />       -->
+<!--         </table> -->
+<!--         <table schema="sys_library" tableName="t_borrow_type" domainObjectName="BorrowType"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="borrow_type" property="borrow_type" />     -->
+<!--             <columnOverride column="borrow_value" property="borrow_value" />       -->
+<!--         </table> -->
+<!--         <table schema="sys_library" tableName="t_mock_a7_result" domainObjectName="A7"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="priority" property="priority" />     -->
+<!--             <columnOverride column="errorCode" property="errorCode" />    -->
+<!--             <columnOverride column="errorMsg" property="errorMsg" />   -->
+<!--             <columnOverride column="checkResult" property="checkResult" />   -->
+<!--             <columnOverride column="creditScore" property="creditScore" />   -->
+<!--             <columnOverride column="timeout" property="timeout" />   -->
+<!--             <columnOverride column="appKey" property="appKey" /> -->
+<!--             <columnOverride column="orderId" property="orderId" />   -->
+<!--             <columnOverride column="insScore" property="insScore" />   -->
+<!--             <columnOverride column="m3Score" property="m3Score" />   -->
+<!--             <columnOverride column="reservationScore" property="reservationScore" />   -->
+<!--             <columnOverride column="m2Score" property="m2Score" />   -->
+<!--             <columnOverride column="riskName1" property="riskName1" />     -->
+<!--             <columnOverride column="riskName2" property="riskName2" /> -->
+<!--             <columnOverride column="times" property="times" /> -->
+<!--         </table> -->
+<!--         <table schema="sys_library" tableName="t_mock_a5_result" domainObjectName="A5"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="priority" property="priority" />     -->
+<!--             <columnOverride column="errorCode" property="errorCode" />    -->
+<!--             <columnOverride column="errorMsg" property="errorMsg" />   -->
+<!--             <columnOverride column="data" property="data" />   -->
+<!--             <columnOverride column="timeout" property="timeout" />   -->
+<!--             <columnOverride column="times" property="times" /> -->
+<!--         </table> -->
+<!--         <table schema="sys_library" tableName="t_mock_IdCard_result" domainObjectName="IdCard"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="priority" property="priority" />     -->
+<!--             <columnOverride column="errorCode" property="errorCode" />    -->
+<!--             <columnOverride column="errorMsg" property="errorMsg" />   -->
+<!--             <columnOverride column="uid" property="uid" />   -->
+<!--             <columnOverride column="checkStatus" property="checkStatus" />   -->
+<!--             <columnOverride column="message" property="message" />   -->
+<!--             <columnOverride column="timeout" property="timeout" />   -->
+<!--             <columnOverride column="times" property="times" /> -->
+<!--         </table> -->
+<!--         <table schema="sys_library" tableName="t_mock_zhima_result" domainObjectName="Zhima"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="priority" property="priority" />     -->
+<!--             <columnOverride column="errorCode" property="errorCode" />    -->
+<!--             <columnOverride column="errorMsg" property="errorMsg" />   -->
+<!--             <columnOverride column="uid" property="uid" />   -->
+<!--             <columnOverride column="result" property="result" />   -->
+<!--             <columnOverride column="authorized" property="authorized" />   -->
+<!--             <columnOverride column="timeout" property="timeout" />   -->
+<!--             <columnOverride column="times" property="times" /> -->
+<!--         </table> -->
+<!--         <table schema="sys_library" tableName="t_mock_kafka_result" domainObjectName="Kafka"  -->
+<!--         	enableCountByExample="false" enableUpdateByExample="false"     -->
+<!--             enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">     -->
+<!--             <columnOverride column="id" property="id"  />     -->
+<!--             <columnOverride column="ip" property="ip" />     -->
+<!--             <columnOverride column="port" property="port" />    -->
+<!--             <columnOverride column="topicName" property="topicName" />   -->
+<!--             <columnOverride column="acks" property="acks" />   -->
+<!--             <columnOverride column="bufferMemory" property="bufferMemory" />   -->
+<!--             <columnOverride column="keySerializer" property="keySerializer" />   -->
+<!--             <columnOverride column="valueSerializer" property="valueSerializer" />   -->
+<!--             <columnOverride column="key" property="key" />  -->
+<!--             <columnOverride column="values" property="values" />  -->
+<!--             <columnOverride column="times" property="times" /> -->
+<!--         </table> -->
+        <table schema="sys_library" tableName="t_mock_ys_result" domainObjectName="YS" 
+        	enableCountByExample="false" enableUpdateByExample="false"    
+            enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">    
+            <columnOverride column="id" property="id"  />    
+            <columnOverride column="priority" property="priority" />    
+            <columnOverride column="resCode" property="resCode" />   
+            <columnOverride column="message" property="message" />  
+            <columnOverride column="remark" property="remark" />  
+            <columnOverride column="timeout" property="timeout" />  
+            <columnOverride column="times" property="times" />  
+        </table>
+    </context>    
+</generatorConfiguration> 

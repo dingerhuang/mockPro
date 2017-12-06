@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mock.dao.A7Mapper">
+  <resultMap id="BaseResultMap" type="com.mock.entity.A7">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="errorCode" jdbcType="INTEGER" property="errorCode" />
+    <result column="errorMsg" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="checkResult" jdbcType="INTEGER" property="checkResult" />
+    <result column="creditScore" jdbcType="INTEGER" property="creditScore" />
+    <result column="timeout" jdbcType="INTEGER" property="timeout" />
+    <result column="appKey" jdbcType="VARCHAR" property="appKey" />
+    <result column="orderId" jdbcType="INTEGER" property="orderId" />
+    <result column="insScore" jdbcType="INTEGER" property="insScore" />
+    <result column="m3Score" jdbcType="INTEGER" property="m3Score" />
+    <result column="reservationScore" jdbcType="INTEGER" property="reservationScore" />
+    <result column="m2Score" jdbcType="INTEGER" property="m2Score" />
+    <result column="riskName1" jdbcType="VARCHAR" property="riskName1" />
+    <result column="riskName2" jdbcType="VARCHAR" property="riskName2" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, priority, errorCode, errorMsg, checkResult, creditScore, timeout, appKey, orderId, 
+    insScore, m3Score, reservationScore, m2Score, riskName1, riskName2, times
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mock_a7_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getLatestResult" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mock_a7_result ORDER BY priority desc LIMIT 1
+  </select>
+  <select id="queryA7List" parameterType="com.mock.vo.A7QueryVo" resultMap="BaseResultMap">
+    select * from t_mock_a7_result where 1=1
+    <if test="priority !=null">
+      	and priority=#{priority,jdbcType=INTEGER}
+    </if>
+    <if test="checkResult !=null">
+      	and checkResult=#{checkResult,jdbcType=INTEGER}
+    </if>
+    <if test="errorCode !=null">
+      	and errorCode=#{errorCode,jdbcType=INTEGER}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_mock_a7_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteBatchByIds" parameterType="list">
+      delete from t_mock_a7_result where id in
+      <foreach item="idsItem" collection="list" open="(" separator="," close=")">
+          #{idsItem}
+      </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.mock.entity.A7">
+    insert into t_mock_a7_result (id, priority, errorCode, 
+      errorMsg, checkResult, creditScore, 
+      timeout, appKey, orderId, 
+      insScore, m3Score, reservationScore, 
+      m2Score, riskName1, riskName2, 
+      times)
+    values (#{id,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, #{errorCode,jdbcType=INTEGER}, 
+      #{errorMsg,jdbcType=VARCHAR}, #{checkResult,jdbcType=INTEGER}, #{creditScore,jdbcType=INTEGER}, 
+      #{timeout,jdbcType=INTEGER}, #{appKey,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, 
+      #{insScore,jdbcType=INTEGER}, #{m3Score,jdbcType=INTEGER}, #{reservationScore,jdbcType=INTEGER}, 
+      #{m2Score,jdbcType=INTEGER}, #{riskName1,jdbcType=VARCHAR}, #{riskName2,jdbcType=VARCHAR}, 
+      #{times,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mock.entity.A7">
+    insert into t_mock_a7_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="errorCode != null">
+        errorCode,
+      </if>
+      <if test="errorMsg != null">
+        errorMsg,
+      </if>
+      <if test="checkResult != null">
+        checkResult,
+      </if>
+      <if test="creditScore != null">
+        creditScore,
+      </if>
+      <if test="timeout != null">
+        timeout,
+      </if>
+      <if test="appKey != null">
+        appKey,
+      </if>
+      <if test="orderId != null">
+        orderId,
+      </if>
+      <if test="insScore != null">
+        insScore,
+      </if>
+      <if test="m3Score != null">
+        m3Score,
+      </if>
+      <if test="reservationScore != null">
+        reservationScore,
+      </if>
+      <if test="m2Score != null">
+        m2Score,
+      </if>
+      <if test="riskName1 != null">
+        riskName1,
+      </if>
+      <if test="riskName2 != null">
+        riskName2,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="errorCode != null">
+        #{errorCode,jdbcType=INTEGER},
+      </if>
+      <if test="errorMsg != null">
+        #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=INTEGER},
+      </if>
+      <if test="creditScore != null">
+        #{creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="timeout != null">
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="appKey != null">
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="insScore != null">
+        #{insScore,jdbcType=INTEGER},
+      </if>
+      <if test="m3Score != null">
+        #{m3Score,jdbcType=INTEGER},
+      </if>
+      <if test="reservationScore != null">
+        #{reservationScore,jdbcType=INTEGER},
+      </if>
+      <if test="m2Score != null">
+        #{m2Score,jdbcType=INTEGER},
+      </if>
+      <if test="riskName1 != null">
+        #{riskName1,jdbcType=VARCHAR},
+      </if>
+      <if test="riskName2 != null">
+        #{riskName2,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mock.entity.A7">
+    update t_mock_a7_result
+    <set>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="errorCode != null">
+        errorCode = #{errorCode,jdbcType=INTEGER},
+      </if>
+      <if test="errorMsg != null">
+        errorMsg = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="checkResult != null">
+        checkResult = #{checkResult,jdbcType=INTEGER},
+      </if>
+      <if test="creditScore != null">
+        creditScore = #{creditScore,jdbcType=INTEGER},
+      </if>
+      <if test="timeout != null">
+        timeout = #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="appKey != null">
+        appKey = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        orderId = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="insScore != null">
+        insScore = #{insScore,jdbcType=INTEGER},
+      </if>
+      <if test="m3Score != null">
+        m3Score = #{m3Score,jdbcType=INTEGER},
+      </if>
+      <if test="reservationScore != null">
+        reservationScore = #{reservationScore,jdbcType=INTEGER},
+      </if>
+      <if test="m2Score != null">
+        m2Score = #{m2Score,jdbcType=INTEGER},
+      </if>
+      <if test="riskName1 != null">
+        riskName1 = #{riskName1,jdbcType=VARCHAR},
+      </if>
+      <if test="riskName2 != null">
+        riskName2 = #{riskName2,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mock.entity.A7">
+    update t_mock_a7_result
+    set priority = #{priority,jdbcType=INTEGER},
+      errorCode = #{errorCode,jdbcType=INTEGER},
+      errorMsg = #{errorMsg,jdbcType=VARCHAR},
+      checkResult = #{checkResult,jdbcType=INTEGER},
+      creditScore = #{creditScore,jdbcType=INTEGER},
+      timeout = #{timeout,jdbcType=INTEGER},
+      appKey = #{appKey,jdbcType=VARCHAR},
+      orderId = #{orderId,jdbcType=INTEGER},
+      insScore = #{insScore,jdbcType=INTEGER},
+      m3Score = #{m3Score,jdbcType=INTEGER},
+      reservationScore = #{reservationScore,jdbcType=INTEGER},
+      m2Score = #{m2Score,jdbcType=INTEGER},
+      riskName1 = #{riskName1,jdbcType=VARCHAR},
+      riskName2 = #{riskName2,jdbcType=VARCHAR},
+      times = #{times,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

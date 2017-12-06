@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mock.dao.BookMapper">
+  <resultMap id="BaseResultMap" type="com.mock.entity.Book">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ISBNNumber" jdbcType="VARCHAR" property="ISBNNumber" />
+    <result column="bookName" jdbcType="VARCHAR" property="bookName" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="press" jdbcType="VARCHAR" property="press" />
+    <result column="writer" jdbcType="VARCHAR" property="writer" />
+    <result column="code_type" jdbcType="VARCHAR" property="code_type" />
+    <result column="code_borrow_type" jdbcType="VARCHAR" property="code_borrow_type" />
+  </resultMap>
+  <resultMap id="BaseResultMapWithType" type="com.mock.entity.Book">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ISBNNumber" jdbcType="VARCHAR" property="ISBNNumber" />
+    <result column="bookName" jdbcType="VARCHAR" property="bookName" />
+    <result column="price" jdbcType="REAL" property="price" />
+    <result column="press" jdbcType="VARCHAR" property="press" />
+    <result column="writer" jdbcType="VARCHAR" property="writer" />
+    <result column="book_type" jdbcType="VARCHAR" property="book_type" />
+    <result column="borrow_type" jdbcType="VARCHAR" property="borrow_type" />
+    <association property="bookType" column="type_code" javaType="com.mock.entity.BookType">
+	    <id column="id" jdbcType="BIGINT" property="id" />
+	    <result column="type_code" jdbcType="VARCHAR" property="type_code" />
+	    <result column="type_value" jdbcType="VARCHAR" property="type_value" />
+    </association>
+    <association property="borrowType" column="borrow_type" javaType="com.mock.entity.BorrowType">
+	    <id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="borrow_type" jdbcType="VARCHAR" property="borrow_type" />
+	    <result column="borrow_value" jdbcType="VARCHAR" property="borrow_value" />
+    </association>
+  </resultMap>
+  <select id="selectOneById" parameterType="int" resultMap="BaseResultMapWithType">
+      select b.ISBNNumber,b.bookName,b.price,b.press,b.writer,d.type_value,c.borrow_value from t_books b , t_borrow_type c , t_book_type d where b.book_type=d.type_code and b.borrow_type=c.borrow_type and b.id=#{id,jdbcType=INTEGER}
+  </select>
+  <!-- 或者使用resultMap和*自动匹配字段，返回list -->
+  <select id="selectAll" resultMap="BaseResultMap">
+      select * from t_books
+  </select>
+  <select id="findBookList" parameterType="com.mock.vo.BookQueryVo"  resultMap="BaseResultMapWithType">
+      select b.id,b.ISBNNumber,b.bookName,b.price,b.press,b.writer,d.type_value book_type,c.borrow_value borrow_type from t_books b , t_borrow_type c , t_book_type d where b.book_type=d.type_code and b.borrow_type=c.borrow_type
+      <if test="ISBNNumber !=null">
+      		and b.ISBNNumber=#{ISBNNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="bookName !=null">
+      		and b.bookName=#{bookName,jdbcType=VARCHAR}
+      </if> 
+      <if test="book_type !=null">
+      		and b.book_type=#{book_type,jdbcType=VARCHAR}
+      </if> 
+  </select>
+  <sql id="Base_Column_List">
+    id, ISBNNumber, bookName, price, press, writer, book_type, borrow_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_books
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_books
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteBatchByIds" parameterType="list">
+        delete from t_books where id in
+        <foreach item="idsItem" collection="list" open="(" separator="," close=")">
+            #{idsItem}
+        </foreach>
+    </delete>
+  <insert id="insert" parameterType="com.mock.entity.Book">
+    insert into t_books (id, ISBNNumber, bookName, 
+      price, press, writer, 
+      book_type, borrow_type)
+    values (#{id,jdbcType=INTEGER}, #{ISBNNumber,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, 
+      #{price,jdbcType=REAL}, #{press,jdbcType=VARCHAR}, #{writer,jdbcType=VARCHAR}, 
+      #{book_type,jdbcType=VARCHAR}, #{borrow_type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mock.entity.Book">
+    insert into t_books
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ISBNNumber != null">
+        ISBNNumber,
+      </if>
+      <if test="bookName != null">
+        bookName,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="press != null">
+        press,
+      </if>
+      <if test="writer != null">
+        writer,
+      </if>
+      <if test="code_type != null">
+        book_type,
+      </if>
+      <if test="code_borrow_type != null">
+        borrow_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ISBNNumber != null">
+        #{ISBNNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="press != null">
+        #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="writer != null">
+        #{writer,jdbcType=VARCHAR},
+      </if>
+      <if test="code_type != null">
+        #{book_type,jdbcType=VARCHAR},
+      </if>
+      <if test="code_borrow_type != null">
+        #{borrow_type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mock.entity.Book">
+    update t_books
+    <set>
+      <if test="ISBNNumber != null">
+        ISBNNumber = #{ISBNNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null">
+        bookName = #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="press != null">
+        press = #{press,jdbcType=VARCHAR},
+      </if>
+      <if test="writer != null">
+        writer = #{writer,jdbcType=VARCHAR},
+      </if>
+      <if test="book_type != null">
+        book_type = #{book_type,jdbcType=VARCHAR},
+      </if>
+      <if test="borrow_type != null">
+        borrow_type = #{borrow_type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mock.entity.Book">
+    update t_books
+    set ISBNNumber = #{ISBNNumber,jdbcType=VARCHAR},
+      bookName = #{bookName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=REAL},
+      press = #{press,jdbcType=VARCHAR},
+      writer = #{writer,jdbcType=VARCHAR},
+      book_type = #{book_type,jdbcType=VARCHAR},
+      borrow_type = #{borrow_type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

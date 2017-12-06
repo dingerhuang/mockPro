@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mock.dao.YSMapper">
+  <resultMap id="BaseResultMap" type="com.mock.entity.YS">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="priority" jdbcType="INTEGER" property="priority" />
+    <result column="resCode" jdbcType="INTEGER" property="resCode" />
+    <result column="message" jdbcType="VARCHAR" property="message" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="timeout" jdbcType="INTEGER" property="timeout" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, priority, resCode, message, remark, timeout, times
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mock_ys_result
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getLatestResult" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mock_ys_result
+    ORDER BY priority desc LIMIT 1
+  </select>
+  <select id="queryYsList" parameterType="com.mock.vo.YSQueryVo" resultMap="BaseResultMap">
+    select * from t_mock_a5_result where 1=1
+    <if test="priority !=null">
+      	and priority=#{priority,jdbcType=INTEGER}
+    </if>
+    <if test="resCode !=null">
+      	and resCode=#{resCode,jdbcType=INTEGER}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_mock_ys_result
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteBatchByIds" parameterType="list">
+      delete from t_mock_ys_result where id in
+      <foreach item="idsItem" collection="list" open="(" separator="," close=")">
+          #{idsItem}
+      </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.mock.entity.YS">
+    insert into t_mock_ys_result (id, priority, resCode, 
+      message, remark, timeout, 
+      times)
+    values (#{id,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, #{resCode,jdbcType=INTEGER}, 
+      #{message,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{timeout,jdbcType=INTEGER}, 
+      #{times,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mock.entity.YS">
+    insert into t_mock_ys_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="resCode != null">
+        resCode,
+      </if>
+      <if test="message != null">
+        message,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="timeout != null">
+        timeout,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="resCode != null">
+        #{resCode,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null">
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mock.entity.YS">
+    update t_mock_ys_result
+    <set>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="resCode != null">
+        resCode = #{resCode,jdbcType=INTEGER},
+      </if>
+      <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null">
+        timeout = #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mock.entity.YS">
+    update t_mock_ys_result
+    set priority = #{priority,jdbcType=INTEGER},
+      resCode = #{resCode,jdbcType=INTEGER},
+      message = #{message,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      timeout = #{timeout,jdbcType=INTEGER},
+      times = #{times,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
