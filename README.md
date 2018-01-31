@@ -10,3 +10,5 @@
 4、properties配置文件在xml中引入及使用
 5、web.xml中引入log4j
 6、前端bootstrap简单知识点及简单的js、dom、ajax等操作
+备注：
+使用mq消费者时，若改变topic需重启程序。
