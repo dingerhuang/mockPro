@@ -11,7 +11,7 @@
     <result column="keySerializer" jdbcType="VARCHAR" property="keySerializer" />
     <result column="valueSerializer" jdbcType="VARCHAR" property="valueSerializer" />
     <result column="key" jdbcType="INTEGER" property="key" />
-    <result column="values" jdbcType="INTEGER" property="values" />
+    <result column="values" jdbcType="VARCHAR" property="values" />
     <result column="times" jdbcType="INTEGER" property="times" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -48,7 +48,7 @@
     values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, 
       #{topicName,jdbcType=VARCHAR}, #{acks,jdbcType=VARCHAR}, #{bufferMemory,jdbcType=INTEGER}, 
       #{keySerializer,jdbcType=VARCHAR}, #{valueSerializer,jdbcType=VARCHAR}, #{key,jdbcType=INTEGER}, 
-      #{values,jdbcType=INTEGER}, #{times,jdbcType=INTEGER})
+      #{values,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mock.entity.Kafka">
     insert into t_mock_kafka_result
@@ -116,7 +116,7 @@
         #{key,jdbcType=INTEGER},
       </if>
       <if test="values != null">
-        #{values,jdbcType=INTEGER},
+        #{values,jdbcType=VARCHAR},
       </if>
       <if test="times != null">
         #{times,jdbcType=INTEGER},
@@ -151,7 +151,7 @@
         key = #{key,jdbcType=INTEGER},
       </if>
       <if test="values != null">
-        values = #{values,jdbcType=INTEGER},
+        values = #{values,jdbcType=VARCHAR},
       </if>
       <if test="times != null">
         times = #{times,jdbcType=INTEGER},
@@ -169,7 +169,7 @@
       keySerializer = #{keySerializer,jdbcType=VARCHAR},
       valueSerializer = #{valueSerializer,jdbcType=VARCHAR},
       key = #{key,jdbcType=INTEGER},
-      values = #{values,jdbcType=INTEGER},
+      values = #{values,jdbcType=VARCHAR},
       times = #{times,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

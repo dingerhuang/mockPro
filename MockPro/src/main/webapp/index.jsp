@@ -61,7 +61,7 @@
             <li role="separator" class="divider"></li>
             <li><a href="manage/kafka">kafka</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="manage/http">http</a></li>
+            <li><a href="manage/rocketmq">rocketmq</a></li>
           </ul>
         </li>
       </ul>

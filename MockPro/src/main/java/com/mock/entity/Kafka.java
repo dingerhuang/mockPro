@@ -19,7 +19,7 @@ public class Kafka {
 
 	private Integer key;
 
-	private Integer values;
+	private String values;
 
 	private Integer times;
 
@@ -95,11 +95,11 @@ public class Kafka {
 		this.key = key;
 	}
 
-	public Integer getValues() {
+	public String getValues() {
 		return values;
 	}
 
-	public void setValues(Integer values) {
+	public void setValues(String values) {
 		this.values = values;
 	}
 

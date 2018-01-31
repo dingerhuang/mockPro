@@ -101,11 +101,11 @@ public class SystemContrller {
 		return "zhima";
 	}
 	/*
-	 * http
+	 * rocketmq
 	 */
-	@RequestMapping(value="/http")
+	@RequestMapping(value="/rocketmq")
 	public String Managehttp(){
-		return "http";
+		return "rocketmq";
 	}
 	
 	

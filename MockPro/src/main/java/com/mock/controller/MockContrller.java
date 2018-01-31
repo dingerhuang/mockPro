@@ -26,7 +26,7 @@ import com.mock.entity.A7;
 import com.mock.entity.IdCard;
 import com.mock.entity.YS;
 import com.mock.entity.Zhima;
-import com.mock.util.GetRandom;
+import com.mock.util.CommonUtil;
 
 
 /*
@@ -103,8 +103,8 @@ public class MockContrller {
 		String errorMsg = idcard.getErrorMsg();
 		String uid;
 		if(idcard.getUid().isEmpty()){
-			String timeSss=GetRandom.getTimeSss();
-			String randomStr=GetRandom.getRandomString(15);
+			String timeSss=CommonUtil.getTimeSss();
+			String randomStr=CommonUtil.getRandomString(15);
 			uid = timeSss+randomStr;
 		}else{
 			uid = idcard.getUid();
@@ -151,8 +151,8 @@ public class MockContrller {
 		if (zhima.getUid() == null||zhima.getUid().isEmpty()) {
 			//时间戳
 			//long uid=System.currentTimeMillis();
-			String timeSss=GetRandom.getTimeSss();
-			String randomStr=GetRandom.getRandomString(15);
+			String timeSss=CommonUtil.getTimeSss();
+			String randomStr=CommonUtil.getRandomString(15);
 			uid = timeSss+randomStr;
 		} else {
 			uid = zhima.getUid();
@@ -209,7 +209,7 @@ public class MockContrller {
     	Calendar cal = Calendar.getInstance(); 
 		Date date = cal.getTime();
     	String data=new SimpleDateFormat("yyyyMMddHHmmssSSS").format(date);
-		String str=GetRandom.getRandomString(13);
+		String str=CommonUtil.getRandomString(13);
 		data =data+str;
 		jo.addProperty("data", data);
 		return jo.toString();
@@ -222,8 +222,9 @@ public class MockContrller {
 	@ResponseBody
 	public YS YinSheng() throws InterruptedException{
     	YS ys = ysMapper.getLatestResult();
-    	//返回结果不需要id
+    	//返回结果不需要id,结果不影响
     	ys.setId(null);
+    	CommonUtil.thinkTime(ys.getTimeout());
     	//debug日志需要在log4j.properties中进行配置
     	log.info("success");
 

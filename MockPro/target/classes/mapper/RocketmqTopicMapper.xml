@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mock.dao.RocketmqTopicMapper">
+  <resultMap id="BaseResultMap" type="com.mock.entity.RocketmqTopic">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="port" jdbcType="INTEGER" property="port" />
+    <result column="topicName" jdbcType="VARCHAR" property="topicName" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="values" jdbcType="VARCHAR" property="values" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+    <result column="mode" jdbcType="INTEGER" property="mode" />
+    <result column="consume_flag" jdbcType="INTEGER" property="consume_flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ip, port, topicName, tag, key, values, times, mode, consume_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    id, ip, port, topicName, tag, `key`, `values`, times, mode, consume_flag
+    from t_mock_rocketmq_topic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryRocketmqTopicList" parameterType="com.mock.vo.RocketmqVo" resultMap="BaseResultMap">
+    select * from t_mock_rocketmq_topic where 1=1
+    <if test="topicName !=null">
+      	and topicName=#{topicName,jdbcType=VARCHAR}
+    </if>
+    <if test="ip !=null">
+      	and topicName=#{ip,jdbcType=VARCHAR}
+    </if>
+    <if test="key !=null">
+      	and `key`=#{key,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_mock_rocketmq_topic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mock.entity.RocketmqTopic">
+    insert into t_mock_rocketmq_topic (id, ip, port, 
+      topicName, tag, key, 
+      values, times, mode, 
+      consume_flag)
+    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, 
+      #{topicName,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      #{values,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER}, #{mode,jdbcType=INTEGER}, 
+      #{consume_flag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mock.entity.RocketmqTopic">
+    insert into t_mock_rocketmq_topic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="topicName != null">
+        topicName,
+      </if>
+      <if test="tag != null">
+        tag,
+      </if>
+      <if test="key != null">
+        `key`,
+      </if>
+      <if test="values != null">
+        `values`,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="mode != null">
+        mode,
+      </if>
+      <if test="consume_flag != null">
+        consume_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null">
+        #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="values != null">
+        #{values,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=INTEGER},
+      </if>
+      <if test="mode != null">
+        #{mode,jdbcType=INTEGER},
+      </if>
+      <if test="consume_flag != null">
+        #{consume_flag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mock.entity.RocketmqTopic">
+    update t_mock_rocketmq_topic
+    <set>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=INTEGER},
+      </if>
+      <if test="topicName != null">
+        topicName = #{topicName,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null">
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="key != null">
+        `key` = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="values != null">
+        `values` = #{values,jdbcType=VARCHAR},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=INTEGER},
+      </if>
+      <if test="mode != null">
+        mode = #{mode,jdbcType=INTEGER},
+      </if>
+      <if test="consume_flag != null">
+        consume_flag = #{consume_flag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mock.entity.RocketmqTopic">
+    update t_mock_rocketmq_topic
+    set ip = #{ip,jdbcType=VARCHAR},
+      port = #{port,jdbcType=INTEGER},
+      topicName = #{topicName,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
+      values = #{values,jdbcType=VARCHAR},
+      times = #{times,jdbcType=INTEGER},
+      mode = #{mode,jdbcType=INTEGER},
+      consume_flag = #{consume_flag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
