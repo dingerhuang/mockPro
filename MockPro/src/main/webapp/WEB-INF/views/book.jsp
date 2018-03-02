@@ -483,7 +483,7 @@
 		$.each(books, function(index, item) {
 			var checkBoxTd=$("<td><input type='checkbox' class='each_checkbox'/></td>");
 			var id = $("<td></td>").append(item.id);
-			var isbnnumber = $("<td></td>").append(item.isbnnumber);
+			var isbnnumber = $("<td></td>").append(item.ISBNNumber);
 			var bookName = $("<td></td>").append(item.bookName);
 			var price = $("<td></td>").append(item.price);
 			var press = $("<td></td>").append(item.press);

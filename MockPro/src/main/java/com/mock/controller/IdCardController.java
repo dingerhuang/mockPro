@@ -72,6 +72,8 @@ public class IdCardController {
 	@ResponseBody
 	public Message updateIdCard(IdCard idCard){
 		try {
+			//字段为int型时，界面不填值此处为null，为string型时，此处为空
+			//log.info("--"+idCard.getErrorCode()+"==");
 			idCardService.updateIdCard(idCard);
 			return Message.sucess();
 			

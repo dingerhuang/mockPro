@@ -95,7 +95,7 @@ public class MockContrller {
 	 */
 	@RequestMapping(value="/nameIdCardAccountVerify",produces={"application/json;charset=UTF-8"})
 	@ResponseBody
-	public String nameIdCardAccountVerify(){
+	public String nameIdCardAccountVerify() throws InterruptedException{
 		IdCard idcard = idCardMapper.getLatestResult();
 		JsonObject jo = new JsonObject();
 		JsonObject data = new JsonObject();
@@ -117,6 +117,45 @@ public class MockContrller {
 		data.addProperty("checkStatus", checkStatus);
 		data.addProperty("message", message);
 		jo.add("data", data);
+		if (idcard.getTimeout()==null){
+		}else{
+			Thread.sleep(idcard.getTimeout());
+		}
+		
+		return jo.toString();
+	}
+	/*
+	 * 返回二要素认证结果，返回t_mock_idcard_result表中priority字段最大的值，返回值可在界面CRUD
+	 * 二要素和三要素的返回json数据格式一致，直接使用三要素的结果即可
+	 */
+	@RequestMapping(value="/idNameCheck",produces={"application/json;charset=UTF-8"})
+	@ResponseBody
+	public String idNameCheck() throws InterruptedException{
+		IdCard idcard = idCardMapper.getLatestResult();
+		JsonObject jo = new JsonObject();
+		JsonObject data = new JsonObject();
+		int errorCode = idcard.getErrorCode();
+		String errorMsg = idcard.getErrorMsg();
+		String uid;
+		if(idcard.getUid().isEmpty()){
+			String timeSss=CommonUtil.getTimeSss();
+			String randomStr=CommonUtil.getRandomString(15);
+			uid = timeSss+randomStr;
+		}else{
+			uid = idcard.getUid();
+		}
+		jo.addProperty("errorCode", errorCode);
+		jo.addProperty("errorMsg", errorMsg);
+		jo.addProperty("uid", uid);
+		String checkStatus = idcard.getCheckStatus();
+		String message =idcard.getMessage();
+		data.addProperty("checkStatus", checkStatus);
+		data.addProperty("message", message);
+		jo.add("data", data);
+		if (idcard.getTimeout()==null){
+		}else{
+			Thread.sleep(idcard.getTimeout());
+		}
 		
 		return jo.toString();
 	}

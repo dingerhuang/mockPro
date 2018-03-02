@@ -14,13 +14,13 @@
 	-->
 
 	<!-- 与上面的配置等价，下面的更容易理解 -->  
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+	<bean id="propertyConfigurerForProject1" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >  
+	    <property name="ignoreUnresolvablePlaceholders" value="true" />
 	    <property name="locations"> <!-- PropertyPlaceholderConfigurer类中有个locations属性，接收的是一个数组，即我们可以在下面配好多个properties文件 -->  
 	        <array>  
 	            <value>classpath:properties/jdbc.properties</value>  
 	        </array>  
 	    </property>  
-	    <property name="ignoreUnresolvablePlaceholders" value="true" />
 	</bean>
     <!-- 2.数据库连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
