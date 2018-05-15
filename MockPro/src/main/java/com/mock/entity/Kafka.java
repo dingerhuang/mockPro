@@ -17,7 +17,7 @@ public class Kafka {
 
 	private String valueSerializer;
 
-	private Integer key;
+	private String key;
 
 	private String values;
 
@@ -87,11 +87,11 @@ public class Kafka {
 		this.valueSerializer = valueSerializer;
 	}
 
-	public Integer getKey() {
+	public String getKey() {
 		return key;
 	}
 
-	public void setKey(Integer key) {
+	public void setKey(String key) {
 		this.key = key;
 	}
 

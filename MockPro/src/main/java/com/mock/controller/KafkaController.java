@@ -82,7 +82,7 @@ public class KafkaController {
 	/*
 	 * 发送kafka消息
 	 */
-	@RequestMapping("/send")
+	@RequestMapping(value="/send")
 	@ResponseBody
 	public Message sendKafaMessage(HttpServletRequest request,HttpServletResponse response,Kafka kafka){
 		
@@ -104,18 +104,35 @@ public class KafkaController {
 		props.put("key.serializer", keySerializer);
 		props.put("value.serializer",valueSerializer);
 		KafkaProducer<String, String> producer = new KafkaProducer<String,String>(props);
-		try{
-			for(int i=0;i<times;i++){
-				producer.send(new ProducerRecord<String, String>(topicName, key,values));
-				kafkaService.saveKafka(kafka);
-				log.info("Message sent successfully");
+		//当不传key和次数大于1时
+		if((key == null||key.length()<=0) && times>1){
+			try{
+				for(int i=30000;i<times;i++){
+					producer.send(new ProducerRecord<String, String>(topicName, i+"",values));
+					//kafkaService.saveKafka(kafka);
+					//log.info("Message sent successfully");
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				return Message.fail();
+			}finally {
+				producer.close();
 			}
-		}catch (Exception e) {
-			e.printStackTrace();
-			return Message.fail();
-		}finally {
-			producer.close();
+		}else{
+			try{
+				for(int i=0;i<times;i++){
+					producer.send(new ProducerRecord<String, String>(topicName, key,values));
+					kafkaService.saveKafka(kafka);
+					log.info("Message sent successfully!");
+				}
+			}catch (Exception e) {
+				e.printStackTrace();
+				return Message.fail();
+			}finally {
+				producer.close();
+			}
 		}
+		
 		log.info("success");
 		return Message.sucess();
 	}

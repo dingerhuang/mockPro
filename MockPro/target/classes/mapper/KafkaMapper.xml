@@ -10,7 +10,7 @@
     <result column="bufferMemory" jdbcType="INTEGER" property="bufferMemory" />
     <result column="keySerializer" jdbcType="VARCHAR" property="keySerializer" />
     <result column="valueSerializer" jdbcType="VARCHAR" property="valueSerializer" />
-    <result column="key" jdbcType="INTEGER" property="key" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
     <result column="values" jdbcType="VARCHAR" property="values" />
     <result column="times" jdbcType="INTEGER" property="times" />
   </resultMap>
@@ -47,7 +47,7 @@
       values, times)
     values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, 
       #{topicName,jdbcType=VARCHAR}, #{acks,jdbcType=VARCHAR}, #{bufferMemory,jdbcType=INTEGER}, 
-      #{keySerializer,jdbcType=VARCHAR}, #{valueSerializer,jdbcType=VARCHAR}, #{key,jdbcType=INTEGER}, 
+      #{keySerializer,jdbcType=VARCHAR}, #{valueSerializer,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
       #{values,jdbcType=VARCHAR}, #{times,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mock.entity.Kafka">
@@ -113,7 +113,7 @@
         #{valueSerializer,jdbcType=VARCHAR},
       </if>
       <if test="key != null">
-        #{key,jdbcType=INTEGER},
+        #{key,jdbcType=VARCHAR},
       </if>
       <if test="values != null">
         #{values,jdbcType=VARCHAR},
@@ -148,7 +148,7 @@
         valueSerializer = #{valueSerializer,jdbcType=VARCHAR},
       </if>
       <if test="key != null">
-        key = #{key,jdbcType=INTEGER},
+        key = #{key,jdbcType=VARCHAR},
       </if>
       <if test="values != null">
         values = #{values,jdbcType=VARCHAR},
@@ -168,7 +168,7 @@
       bufferMemory = #{bufferMemory,jdbcType=INTEGER},
       keySerializer = #{keySerializer,jdbcType=VARCHAR},
       valueSerializer = #{valueSerializer,jdbcType=VARCHAR},
-      key = #{key,jdbcType=INTEGER},
+      key = #{key,jdbcType=VARCHAR},
       values = #{values,jdbcType=VARCHAR},
       times = #{times,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

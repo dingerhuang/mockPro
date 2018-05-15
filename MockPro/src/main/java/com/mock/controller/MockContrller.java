@@ -269,4 +269,51 @@ public class MockContrller {
 
 		return ys;
 	}
+    /*
+     *公众号-我得账单，获取账单数据
+     */
+    @RequestMapping(value="/weixinCust/getWeixinCustRepayInfo",produces={"application/json;charset=UTF-8"})
+    @ResponseBody
+    public String getWeixinCustRepayInfo(){
+    	String jsonData="{\"code\": 1,\"data\": [{\"id\": null,\"loanId\": \"2c90826396a31add0196a40ea8ee00a6\",\"loanNo\": \"11000201803130002\",\"certNo\": \"510681198911250615\",\"custName\": \"测试\",\"loanAmount\": 3000.00,\"loanInstalments\": 10,\"monthRepayAmount\": 330.00,\"firstRepayDate\": \"20180413\",\"lastRepayDate\": null,\"monthRepayDate\": \"13\",\"contractStatus\": \"3\",\"phaseNumber\": 2,\"dueDate\": 1522598400000,\"repayDate\": null,\"repayStatus\": \"0\",\"plannedTotal\": 330.00,\"indeedTotal\": 0.00,\"plannedCapital\": 289.31,\"reduceTotal\": 0.00,\"indeedCapital\": 0.00,\"plannedForfeit\": 0.00,\"indeedForfeit\": 0.00,\"updateTime\": null,\"busiType\": \"0\",\"endPhaseNumber\": 2,\"busiId\": \"31079726\",\"channel\": \"002\",\"balance\": 0.00,\"repayType\": null,\"overdueLevel\": \"0\"}, {\"id\": null,\"loanId\": \"2c90826396a31add0196a40ea8ee00a6\",\"loanNo\": \"11000201803130002\",\"certNo\": \"510681198911250615\",\"custName\": \"测试\",\"loanAmount\": 3000.00,\"loanInstalments\": 10,\"monthRepayAmount\": 330.00,\"firstRepayDate\": \"20180413\",\"lastRepayDate\": null,\"monthRepayDate\": \"13\",\"contractStatus\": \"3\",\"phaseNumber\": 1,\"dueDate\": 1520870400000,\"repayDate\": null,\"repayStatus\": \"3\",\"plannedTotal\": 350.00,\"indeedTotal\": 0.00,\"plannedCapital\": 286.36,\"reduceTotal\": 0.00,\"indeedCapital\": 0.00,\"plannedForfeit\": 20.00,\"indeedForfeit\": 0.00,\"updateTime\": null,\"busiType\": \"3\",\"endPhaseNumber\": 1,\"busiId\": \"ff8080816218064401621e3afde403ff\",\"channel\": \"002\",\"balance\": 0.00,\"repayType\": null,\"overdueLevel\": \"1\"}]}";
+    	return jsonData;
+    }
+    /*
+     *公众号-我得账单，立即还款
+     */
+    @RequestMapping(value="/weixinCust/getWeixinCustRepayStatus",produces={"application/json;charset=UTF-8"})
+    @ResponseBody
+    public	String getWeixinCustRepayStatus(){
+    	String jsonData = "{\"code\" : 1,\"data\" : {\"code\":\"0000\",\"msg\":\"接口调用成功\"}}";
+    	return jsonData;
+    }
+    /*
+     *公众号-我得账单，绑定银行卡
+     */
+    @RequestMapping(value="/weixinCust/getWeiXinCustNewBankCardInfo",produces={"application/json;charset=UTF-8"})
+    @ResponseBody
+    public	String getWeiXinCustNewBankCardInfo(){
+    	String jsonData = "{\"data\" : {\"retCode\":0,\"cardTypeName\":\"金穗通宝卡(银联卡)\",\"bankName\":\"中国农业银行\",\"cardType\":0,\"bankCode\":\"103\"},\"code\":1}";
+    	return jsonData;
+    }
+    /*
+     *公众号-我得账单，绑定银行卡-填写手机号码（预支付）
+     */
+    @RequestMapping(value="/weixinCust/doWeixinCustPrepay",produces={"application/json;charset=UTF-8"})
+    @ResponseBody
+    public	String doWeixinCustPrepay(){
+    	String jsonData = "{\"data\" : {\"thirdErrorDesc\":\"等待用户回填验证码\",\"tradeStatus\":2,\"payNo\":\"20170418113700e4b042a858f437ed\",\"errorDesc\":null,\"thirdErrorCode\":\"2002\",\"errorCode\":0,\"attachOne\":\"337196122563665920\"},\"code\" : 1}";
+    	
+    	return jsonData;
+    }
+    /*
+     *公众号-我得账单，绑定银行卡-填写手机号码（支付）
+     */
+    @RequestMapping(value="/weixinCust/doWeiXinCustTrade",produces={"application/json;charset=UTF-8"})
+    @ResponseBody
+    public	String doWeiXinCustTrade(){
+    	String jsonData = "{\"data\":{\"payAmount\":1238.00,\"thirdErrorDesc\":\"\",\"tradeStatus\":2,\"payNo\":\"20170418113700e4b042a858f437ed\",\"errorDesc\":null,\"thirdErrorCode\":\"\",\"errorCode\":0},\"code\" :1}";
+    	
+    	return jsonData;
+    }
 }

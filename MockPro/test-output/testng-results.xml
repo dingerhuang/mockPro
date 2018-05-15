@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="33" started-at="2018-04-09T14:06:58Z" finished-at="2018-04-09T14:06:58Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="33" started-at="2018-04-09T14:06:58Z" finished-at="2018-04-09T14:06:58Z">
+      <class name="com.mock.test.NewTest">
+        <test-method status="PASS" signature="firstTestCase()[pri:0, instance:com.mock.test.NewTest@3f49dace]" name="firstTestCase" duration-ms="9" started-at="2018-04-09T22:06:58Z" finished-at="2018-04-09T22:06:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- firstTestCase -->
+        <test-method status="PASS" signature="runOtherTest1()[pri:0, instance:com.mock.test.NewTest@3f49dace]" name="runOtherTest1" duration-ms="2" started-at="2018-04-09T22:06:58Z" finished-at="2018-04-09T22:06:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runOtherTest1 -->
+        <test-method status="PASS" signature="runOtherTest2()[pri:0, instance:com.mock.test.NewTest@3f49dace]" name="runOtherTest2" duration-ms="2" started-at="2018-04-09T22:06:58Z" finished-at="2018-04-09T22:06:58Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runOtherTest2 -->
+      </class> <!-- com.mock.test.NewTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

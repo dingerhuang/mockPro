@@ -3,10 +3,10 @@ package com.mock.constant;
 public enum EnvEnum {
 
 	BetaA(1,"10.40.10.197"),
-	BetaB(2,"10.40.10.152"),
-	BetaC(3,"10.40.10.154"),
-	BetaD(4,"10.40.10.156"),
-	BetaE(4,"10.40.10.158");
+	BetaB(2,"10.40.10.198"),
+	BetaC(3,"10.40.10.199"),
+	BetaD(4,"10.40.10.200"),
+	BetaE(5,"10.40.10.201");
 
 	private int code;
 	private String ip;
